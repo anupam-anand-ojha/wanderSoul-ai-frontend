@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import Navbar from "../components/Navbar";
 
 const PlanTrip = () => {
@@ -16,6 +17,7 @@ const PlanTrip = () => {
   });
 
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -45,37 +47,35 @@ const PlanTrip = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    setError("");
+
     if (!formData.place || !formData.time || !formData.budget) {
+      setError("Please fill destination, duration and budget.");
       return;
     }
 
-    setLoading(true);
-
     try {
-      /*
-        Backend API yaha connect hoga.
+      setLoading(true);
 
-        Example:
+      const response = await axios.post(
+        `${import.meta.env.VITE_API_URL}/api/travel/generate`,
+        formData
+      );
 
-        const response = await axios.post(
-          "http://localhost:5000/api/travel/generate",
-          formData
-        );
-
-        navigate("/trip", {
-          state: response.data,
-        });
-      */
-
-      console.log("Trip Data:", formData);
-
-      // Temporary navigation
-      setTimeout(() => {
-        navigate("/trip/result");
-      }, 800);
+      navigate("/trip/result", {
+        state: {
+          trip: response.data,
+        },
+      });
 
     } catch (error) {
-      console.error("Failed to generate trip:", error);
+      console.error(error);
+
+      setError(
+        error.response?.data?.message ||
+        "Failed to generate your trip. Please try again."
+      );
+
     } finally {
       setLoading(false);
     }
@@ -86,7 +86,6 @@ const PlanTrip = () => {
 
       <Navbar />
 
-      {/* Header */}
       <section className="px-6 pb-12 pt-32 md:px-10">
 
         <div className="mx-auto max-w-7xl">
@@ -110,7 +109,6 @@ const PlanTrip = () => {
       </section>
 
 
-      {/* Form */}
       <section className="px-6 pb-24 md:px-10">
 
         <div className="mx-auto max-w-5xl">
@@ -219,12 +217,8 @@ const PlanTrip = () => {
 
                     <option value="Solo">Solo</option>
                     <option value="2 Travelers">2 Travelers</option>
-                    <option value="3-4 Travelers">
-                      3-4 Travelers
-                    </option>
-                    <option value="5+ Travelers">
-                      5+ Travelers
-                    </option>
+                    <option value="3-4 Travelers">3-4 Travelers</option>
+                    <option value="5+ Travelers">5+ Travelers</option>
 
                   </select>
 
@@ -282,7 +276,6 @@ const PlanTrip = () => {
                     Adventure
                   </button>
 
-
                   <button
                     type="button"
                     onClick={() => handleInterest("Beaches")}
@@ -294,7 +287,6 @@ const PlanTrip = () => {
                   >
                     Beaches
                   </button>
-
 
                   <button
                     type="button"
@@ -308,7 +300,6 @@ const PlanTrip = () => {
                     Nature
                   </button>
 
-
                   <button
                     type="button"
                     onClick={() => handleInterest("Food")}
@@ -320,7 +311,6 @@ const PlanTrip = () => {
                   >
                     Food
                   </button>
-
 
                   <button
                     type="button"
@@ -334,7 +324,6 @@ const PlanTrip = () => {
                     Culture
                   </button>
 
-
                   <button
                     type="button"
                     onClick={() => handleInterest("Nightlife")}
@@ -346,7 +335,6 @@ const PlanTrip = () => {
                   >
                     Nightlife
                   </button>
-
 
                   <button
                     type="button"
@@ -382,6 +370,14 @@ const PlanTrip = () => {
                 />
 
               </div>
+
+
+              {/* Error */}
+              {error && (
+                <div className="alert alert-error rounded-2xl">
+                  <span>{error}</span>
+                </div>
+              )}
 
 
               <div className="divider"></div>
