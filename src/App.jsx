@@ -22,8 +22,6 @@ const App = () => {
 
         <Route path="/plan" element={<PlanTrip />} />
 
-        <Route path="/trip/:id" element={<TripResult />} />
-
         <Route path="/trip/result" element={<TripResult />} />
 
         <Route path="/trips" element={<MyTrips />} />
