@@ -1,130 +1,108 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import { useSearchParams, useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 
 const PlanTrip = () => {
+  const [searchParams] = useSearchParams();
   const navigate = useNavigate();
 
+  const selectedPlace = searchParams.get("place");
+
   const [formData, setFormData] = useState({
-    place: "",
+    place: selectedPlace || "",
     time: "",
     budget: "",
     travelers: "",
-    transport: "",
-    interests: [],
-    preferences: "",
+    interests: "",
   });
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-
     setFormData({
       ...formData,
-      [name]: value,
+      [e.target.name]: e.target.value,
     });
-  };
-
-  const handleInterest = (interest) => {
-    if (formData.interests.includes(interest)) {
-      setFormData({
-        ...formData,
-        interests: formData.interests.filter(
-          (item) => item !== interest
-        ),
-      });
-    } else {
-      setFormData({
-        ...formData,
-        interests: [...formData.interests, interest],
-      });
-    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    setLoading(true);
     setError("");
 
-    if (!formData.place || !formData.time || !formData.budget) {
-      setError("Please fill destination, duration and budget.");
-      return;
-    }
-
     try {
-      setLoading(true);
-
-      const response = await axios.post(
-        `${import.meta.env.VITE_API_URL}/api/travel/generate`,
-        formData
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/trip/generate`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
       );
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(
+          data.message || "Failed to generate trip"
+        );
+      }
 
       navigate("/trip/result", {
         state: {
-          trip: response.data,
+          trip: data,
         },
       });
-
     } catch (error) {
-      console.error(error);
-
       setError(
-        error.response?.data?.message ||
-        "Failed to generate your trip. Please try again."
+        error.message || "Something went wrong. Please try again."
       );
-
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <main className="min-h-screen bg-base-100 text-base-content">
-
+    <main className="min-h-screen bg-base-100">
       <Navbar />
 
-      <section className="px-6 pb-12 pt-32 md:px-10">
+      <section className="px-6 pb-20 pt-32 md:px-10 md:pt-40">
+        <div className="mx-auto max-w-3xl">
 
-        <div className="mx-auto max-w-7xl">
+          <div className="text-center">
 
-          <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-primary">
-            AI Travel Planner
-          </p>
+            <p className="text-sm font-semibold uppercase tracking-widest text-primary">
+              AI Trip Planner
+            </p>
 
-          <h1 className="max-w-4xl text-5xl font-bold leading-tight tracking-tight md:text-7xl">
-            Let's plan your
-            <span className="text-primary"> journey.</span>
-          </h1>
+            <h1 className="mt-3 text-5xl font-bold md:text-7xl">
+              Create your
+              <br />
+              <span className="text-primary">perfect trip.</span>
+            </h1>
 
-          <p className="mt-6 max-w-2xl text-base leading-7 text-base-content/60 md:text-lg">
-            Tell wanderSoul what you're looking for and let AI create a
-            journey around you.
-          </p>
+            <p className="mx-auto mt-5 max-w-xl text-base text-base-content/50">
+              Tell wanderSoul what you're looking for and AI will build
+              your journey.
+            </p>
 
-        </div>
+          </div>
 
-      </section>
-
-
-      <section className="px-6 pb-24 md:px-10">
-
-        <div className="mx-auto max-w-5xl">
 
           <form
             onSubmit={handleSubmit}
-            className="card border border-base-content/10 bg-base-200 shadow-xl"
+            className="mt-12 rounded-[2rem] bg-base-200 p-6 md:p-10"
           >
 
-            <div className="card-body gap-8 p-6 md:p-10">
+            <div className="space-y-6">
 
-              {/* Destination */}
               <div>
-
-                <label className="mb-3 block text-sm font-semibold">
-                  Where do you want to go?
+                <label className="mb-2 block text-sm font-semibold">
+                  Destination
                 </label>
 
                 <input
@@ -132,21 +110,18 @@ const PlanTrip = () => {
                   name="place"
                   value={formData.place}
                   onChange={handleChange}
-                  placeholder="e.g. Goa, Bali, Kashmir..."
+                  placeholder="Where do you want to go?"
                   className="input input-bordered h-14 w-full rounded-2xl bg-base-100"
                   required
                 />
-
               </div>
 
 
-              {/* Duration + Budget */}
               <div className="grid gap-6 md:grid-cols-2">
 
                 <div>
-
-                  <label className="mb-3 block text-sm font-semibold">
-                    How long are you travelling?
+                  <label className="mb-2 block text-sm font-semibold">
+                    Trip duration
                   </label>
 
                   <select
@@ -156,223 +131,88 @@ const PlanTrip = () => {
                     className="select select-bordered h-14 w-full rounded-2xl bg-base-100"
                     required
                   >
-
-                    <option value="" disabled>
-                      Select duration
-                    </option>
-
-                    <option value="2 Days">2 Days</option>
-                    <option value="3 Days">3 Days</option>
-                    <option value="4 Days">4 Days</option>
-                    <option value="5 Days">5 Days</option>
-                    <option value="7 Days">7 Days</option>
-                    <option value="10 Days">10 Days</option>
-                    <option value="14 Days">14 Days</option>
-
+                    <option value="">Choose duration</option>
+                    <option value="2 days">2 Days</option>
+                    <option value="3 days">3 Days</option>
+                    <option value="5 days">5 Days</option>
+                    <option value="7 days">7 Days</option>
+                    <option value="10 days">10 Days</option>
+                    <option value="14 days">14 Days</option>
                   </select>
-
                 </div>
 
 
                 <div>
-
-                  <label className="mb-3 block text-sm font-semibold">
-                    What's your budget?
+                  <label className="mb-2 block text-sm font-semibold">
+                    Budget
                   </label>
 
-                  <input
-                    type="number"
+                  <select
                     name="budget"
                     value={formData.budget}
                     onChange={handleChange}
-                    placeholder="₹ 30,000"
-                    className="input input-bordered h-14 w-full rounded-2xl bg-base-100"
+                    className="select select-bordered h-14 w-full rounded-2xl bg-base-100"
                     required
-                  />
-
+                  >
+                    <option value="">Choose budget</option>
+                    <option value="under 10000">
+                      Under ₹10,000
+                    </option>
+                    <option value="10000 - 25000">
+                      ₹10,000 - ₹25,000
+                    </option>
+                    <option value="25000 - 50000">
+                      ₹25,000 - ₹50,000
+                    </option>
+                    <option value="50000 - 100000">
+                      ₹50,000 - ₹1,00,000
+                    </option>
+                    <option value="above 100000">
+                      Above ₹1,00,000
+                    </option>
+                  </select>
                 </div>
 
               </div>
 
 
-              {/* Travelers + Transport */}
-              <div className="grid gap-6 md:grid-cols-2">
-
-                <div>
-
-                  <label className="mb-3 block text-sm font-semibold">
-                    Who's travelling?
-                  </label>
-
-                  <select
-                    name="travelers"
-                    value={formData.travelers}
-                    onChange={handleChange}
-                    className="select select-bordered h-14 w-full rounded-2xl bg-base-100"
-                  >
-
-                    <option value="" disabled>
-                      Select travelers
-                    </option>
-
-                    <option value="Solo">Solo</option>
-                    <option value="2 Travelers">2 Travelers</option>
-                    <option value="3-4 Travelers">3-4 Travelers</option>
-                    <option value="5+ Travelers">5+ Travelers</option>
-
-                  </select>
-
-                </div>
-
-
-                <div>
-
-                  <label className="mb-3 block text-sm font-semibold">
-                    Preferred transport
-                  </label>
-
-                  <select
-                    name="transport"
-                    value={formData.transport}
-                    onChange={handleChange}
-                    className="select select-bordered h-14 w-full rounded-2xl bg-base-100"
-                  >
-
-                    <option value="" disabled>
-                      Select transport
-                    </option>
-
-                    <option value="Flight">Flight</option>
-                    <option value="Train">Train</option>
-                    <option value="Car">Car</option>
-                    <option value="Bus">Bus</option>
-                    <option value="Any">Any</option>
-
-                  </select>
-
-                </div>
-
-              </div>
-
-
-              {/* Interests */}
               <div>
-
-                <label className="mb-4 block text-sm font-semibold">
-                  What are you interested in?
+                <label className="mb-2 block text-sm font-semibold">
+                  Travelling with?
                 </label>
 
-                <div className="flex flex-wrap gap-3">
-
-                  <button
-                    type="button"
-                    onClick={() => handleInterest("Adventure")}
-                    className={`btn rounded-full ${
-                      formData.interests.includes("Adventure")
-                        ? "btn-primary"
-                        : "btn-outline"
-                    }`}
-                  >
-                    Adventure
-                  </button>
-
-                  <button
-                    type="button"
-                    onClick={() => handleInterest("Beaches")}
-                    className={`btn rounded-full ${
-                      formData.interests.includes("Beaches")
-                        ? "btn-primary"
-                        : "btn-outline"
-                    }`}
-                  >
-                    Beaches
-                  </button>
-
-                  <button
-                    type="button"
-                    onClick={() => handleInterest("Nature")}
-                    className={`btn rounded-full ${
-                      formData.interests.includes("Nature")
-                        ? "btn-primary"
-                        : "btn-outline"
-                    }`}
-                  >
-                    Nature
-                  </button>
-
-                  <button
-                    type="button"
-                    onClick={() => handleInterest("Food")}
-                    className={`btn rounded-full ${
-                      formData.interests.includes("Food")
-                        ? "btn-primary"
-                        : "btn-outline"
-                    }`}
-                  >
-                    Food
-                  </button>
-
-                  <button
-                    type="button"
-                    onClick={() => handleInterest("Culture")}
-                    className={`btn rounded-full ${
-                      formData.interests.includes("Culture")
-                        ? "btn-primary"
-                        : "btn-outline"
-                    }`}
-                  >
-                    Culture
-                  </button>
-
-                  <button
-                    type="button"
-                    onClick={() => handleInterest("Nightlife")}
-                    className={`btn rounded-full ${
-                      formData.interests.includes("Nightlife")
-                        ? "btn-primary"
-                        : "btn-outline"
-                    }`}
-                  >
-                    Nightlife
-                  </button>
-
-                  <button
-                    type="button"
-                    onClick={() => handleInterest("Relaxation")}
-                    className={`btn rounded-full ${
-                      formData.interests.includes("Relaxation")
-                        ? "btn-primary"
-                        : "btn-outline"
-                    }`}
-                  >
-                    Relaxation
-                  </button>
-
-                </div>
-
+                <select
+                  name="travelers"
+                  value={formData.travelers}
+                  onChange={handleChange}
+                  className="select select-bordered h-14 w-full rounded-2xl bg-base-100"
+                  required
+                >
+                  <option value="">Choose one</option>
+                  <option value="Solo">Solo</option>
+                  <option value="Couple">Couple</option>
+                  <option value="Friends">Friends</option>
+                  <option value="Family">Family</option>
+                </select>
               </div>
 
 
-              {/* Preferences */}
               <div>
-
-                <label className="mb-3 block text-sm font-semibold">
-                  Anything else we should know?
+                <label className="mb-2 block text-sm font-semibold">
+                  What do you enjoy?
                 </label>
 
                 <textarea
-                  name="preferences"
-                  value={formData.preferences}
+                  name="interests"
+                  value={formData.interests}
                   onChange={handleChange}
-                  rows="4"
-                  placeholder="Tell us about your ideal trip..."
-                  className="textarea textarea-bordered w-full resize-none rounded-2xl bg-base-100"
+                  placeholder="Beaches, mountains, food, adventure, nightlife..."
+                  className="textarea textarea-bordered min-h-32 w-full rounded-2xl bg-base-100"
+                  required
                 />
-
               </div>
 
 
-              {/* Error */}
               {error && (
                 <div className="alert alert-error rounded-2xl">
                   <span>{error}</span>
@@ -380,55 +220,30 @@ const PlanTrip = () => {
               )}
 
 
-              <div className="divider"></div>
-
-
-              {/* Submit */}
-              <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
-
-                <div>
-
-                  <p className="font-semibold">
-                    Ready to explore?
-                  </p>
-
-                  <p className="text-sm text-base-content/50">
-                    AI will create a personalized itinerary for you.
-                  </p>
-
-                </div>
-
-
-                <button
-                  type="submit"
-                  disabled={loading}
-                  className="btn btn-primary rounded-full px-8"
-                >
-
-                  {loading ? (
-                    <>
-                      <span className="loading loading-spinner loading-sm"></span>
-                      Creating your trip...
-                    </>
-                  ) : (
-                    <>
-                      Generate My Trip
-                      <span>✦</span>
-                    </>
-                  )}
-
-                </button>
-
-              </div>
+              <button
+                type="submit"
+                disabled={loading}
+                className="btn btn-primary h-14 w-full rounded-full text-base"
+              >
+                {loading ? (
+                  <>
+                    <span className="loading loading-spinner loading-sm" />
+                    Creating your trip...
+                  </>
+                ) : (
+                  <>
+                    Generate My Trip
+                    <span>✦</span>
+                  </>
+                )}
+              </button>
 
             </div>
 
           </form>
 
         </div>
-
       </section>
-
     </main>
   );
 };
