@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
+import api from "../services/api";
 
 const PlanTrip = () => {
   const [searchParams] = useSearchParams();
@@ -26,45 +27,30 @@ const PlanTrip = () => {
     });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    setLoading(true);
-    setError("");
+  setLoading(true);
+  setError("");
 
-    try {
-      const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/trip/generate`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
-        }
-      );
+  try {
+    const response = await api.post("/plan/travel", formData);
 
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(
-          data.message || "Failed to generate trip"
-        );
-      }
-
-      navigate("/trip/result", {
-        state: {
-          trip: data,
-        },
-      });
-    } catch (error) {
-      setError(
-        error.message || "Something went wrong. Please try again."
-      );
-    } finally {
-      setLoading(false);
-    }
-  };
+    navigate("/trip/result", {
+      state: {
+        trip: response.data,
+      },
+    });
+  } catch (error) {
+    setError(
+      error.response?.data?.message ||
+        error.message ||
+        "Something went wrong. Please try again."
+    );
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <main className="min-h-screen bg-base-100">
@@ -72,9 +58,7 @@ const PlanTrip = () => {
 
       <section className="px-6 pb-20 pt-32 md:px-10 md:pt-40">
         <div className="mx-auto max-w-3xl">
-
           <div className="text-center">
-
             <p className="text-sm font-semibold uppercase tracking-widest text-primary">
               AI Trip Planner
             </p>
@@ -86,20 +70,16 @@ const PlanTrip = () => {
             </h1>
 
             <p className="mx-auto mt-5 max-w-xl text-base text-base-content/50">
-              Tell wanderSoul what you're looking for and AI will build
-              your journey.
+              Tell wanderSoul what you're looking for and AI will build your
+              journey.
             </p>
-
           </div>
-
 
           <form
             onSubmit={handleSubmit}
             className="mt-12 rounded-[2rem] bg-base-200 p-6 md:p-10"
           >
-
             <div className="space-y-6">
-
               <div>
                 <label className="mb-2 block text-sm font-semibold">
                   Destination
@@ -116,9 +96,7 @@ const PlanTrip = () => {
                 />
               </div>
 
-
               <div className="grid gap-6 md:grid-cols-2">
-
                 <div>
                   <label className="mb-2 block text-sm font-semibold">
                     Trip duration
@@ -141,7 +119,6 @@ const PlanTrip = () => {
                   </select>
                 </div>
 
-
                 <div>
                   <label className="mb-2 block text-sm font-semibold">
                     Budget
@@ -155,26 +132,14 @@ const PlanTrip = () => {
                     required
                   >
                     <option value="">Choose budget</option>
-                    <option value="under 10000">
-                      Under ₹10,000
-                    </option>
-                    <option value="10000 - 25000">
-                      ₹10,000 - ₹25,000
-                    </option>
-                    <option value="25000 - 50000">
-                      ₹25,000 - ₹50,000
-                    </option>
-                    <option value="50000 - 100000">
-                      ₹50,000 - ₹1,00,000
-                    </option>
-                    <option value="above 100000">
-                      Above ₹1,00,000
-                    </option>
+                    <option value="under 10000">Under ₹10,000</option>
+                    <option value="10000 - 25000">₹10,000 - ₹25,000</option>
+                    <option value="25000 - 50000">₹25,000 - ₹50,000</option>
+                    <option value="50000 - 100000">₹50,000 - ₹1,00,000</option>
+                    <option value="above 100000">Above ₹1,00,000</option>
                   </select>
                 </div>
-
               </div>
-
 
               <div>
                 <label className="mb-2 block text-sm font-semibold">
@@ -196,7 +161,6 @@ const PlanTrip = () => {
                 </select>
               </div>
 
-
               <div>
                 <label className="mb-2 block text-sm font-semibold">
                   What do you enjoy?
@@ -212,13 +176,11 @@ const PlanTrip = () => {
                 />
               </div>
 
-
               {error && (
                 <div className="alert alert-error rounded-2xl">
                   <span>{error}</span>
                 </div>
               )}
-
 
               <button
                 type="submit"
@@ -237,11 +199,8 @@ const PlanTrip = () => {
                   </>
                 )}
               </button>
-
             </div>
-
           </form>
-
         </div>
       </section>
     </main>
