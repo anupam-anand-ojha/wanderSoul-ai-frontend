@@ -210,7 +210,7 @@ const MyTrips = () => {
 
                     <Link
                       to={`/trip/${trip.slug}`}
-                      className="rounded-full bg-[#EE82EE] px-5 py-2.5 text-sm font-semibold text-white transition-all duration-300 hover:bg-[#d96ed9] hover:shadow-md"
+                      className="rounded-full bg-[#EE82EE] px-5 py-2.5 text-sm font-semibold text-white transition-all duration-300 hover:bg-[#800080] hover:shadow-md"
                     >
                       View Trip ↗
                     </Link>
