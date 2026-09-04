@@ -51,7 +51,7 @@ const Navbar = () => {
         {/* Plan Button */}
         <Link
           to="/plan"
-          className="hidden rounded-full bg-[#EE82EE] px-6 py-3 text-sm font-semibold text-white shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#d96ed9] hover:shadow-lg sm:flex sm:items-center sm:gap-1"
+          className="hidden rounded-full bg-[#EE82EE] px-6 py-3 text-sm font-semibold text-white shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#800080] hover:shadow-lg sm:flex sm:items-center sm:gap-1"
         >
           Plan a Trip
           <span>↗</span>
@@ -86,7 +86,7 @@ const Navbar = () => {
             <li className="mt-2">
               <Link
                 to="/plan"
-                className="rounded-xl bg-[#EE82EE] text-center font-semibold text-white hover:bg-[#D100D1]"
+                className="rounded-xl bg-[#EE82EE] text-center font-semibold text-white hover:bg-[#d96ed9]"
               >
                 Plan a Trip ↗
               </Link>
