@@ -2,34 +2,72 @@ import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
 
 const MyTrips = () => {
-  return (
-    <main className="min-h-screen bg-base-100 text-base-content">
+  const trips = [
+    {
+      name: "Goa Escape",
+      location: "India · 5 Days",
+      description:
+        "Beaches, food, nightlife and a relaxed coastal experience.",
+      price: "₹30,000",
+      slug: "goa",
+      image:
+        "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1200&q=85",
+    },
+    {
+      name: "Kashmir Getaway",
+      location: "India · 6 Days",
+      description:
+        "Mountains, lakes, scenic drives and peaceful landscapes.",
+      price: "₹35,000",
+      slug: "kashmir",
+      image:
+        "https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&w=1200&q=85",
+    },
+    {
+      name: "Bali Adventure",
+      location: "Indonesia · 7 Days",
+      description:
+        "Beaches, temples, waterfalls and unforgettable sunsets.",
+      price: "₹55,000",
+      slug: "bali",
+      image:
+        "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1200&q=85",
+    },
+  ];
 
+  return (
+    <main className="min-h-screen bg-[#faf8ff] text-[#24152f]">
       <Navbar />
 
-      {/* Header */}
-      <section className="px-6 pb-12 pt-32 md:px-10">
-        <div className="mx-auto max-w-7xl">
+      {/* Hero */}
+      <section className="relative overflow-hidden px-6 pb-16 pt-32 md:px-10 md:pb-20">
 
-          <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-primary">
+        {/* Soft purple background */}
+        <div className="pointer-events-none absolute -left-40 -top-40 h-[500px] w-[500px] rounded-full bg-[#e9ddff] opacity-60 blur-3xl" />
+
+        <div className="pointer-events-none absolute -right-40 top-20 h-[450px] w-[450px] rounded-full bg-[#eee4ff] opacity-70 blur-3xl" />
+
+        <div className="relative mx-auto max-w-7xl">
+
+          <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-[#EE82EE]">
             Your journeys
           </p>
 
           <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
 
             <div>
-              <h1 className="text-5xl font-bold tracking-tight md:text-7xl">
-                My Trips<span className="text-primary">.</span>
+              <h1 className="text-5xl font-bold tracking-tight text-[#24152f] md:text-7xl">
+                My Trips<span className="text-[#EE82EE]">.</span>
               </h1>
 
-              <p className="mt-5 max-w-xl text-base leading-7 text-base-content/60 md:text-lg">
+              <p className="mt-5 max-w-xl text-base leading-7 text-[#75677f] md:text-lg">
                 All your planned adventures, saved in one place.
               </p>
             </div>
 
             <Link
               to="/plan"
-              className="btn btn-primary rounded-full px-7"
+              className="w-fit rounded-full bg-[#EE82EE] px-7 py-3 text-sm font-semibold text-white shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#d96ed9] hover:shadow-lg"
             >
               Plan New Trip ↗
             </Link>
@@ -41,45 +79,42 @@ const MyTrips = () => {
 
 
       {/* Stats */}
-      <section className="px-6 md:px-10">
+      <section className="relative px-6 md:px-10">
+
         <div className="mx-auto max-w-7xl">
 
-          <div className="grid gap-4 sm:grid-cols-3">
+          <div className="grid gap-5 sm:grid-cols-3">
 
-            <div className="card border border-base-content/10 bg-base-200">
-              <div className="card-body">
-                <p className="text-sm text-base-content/50">
-                  Total Trips
-                </p>
+            <div className="rounded-3xl border border-[#e9e0f2] bg-white p-6 shadow-sm">
+              <p className="text-sm text-[#8a7b94]">
+                Total Trips
+              </p>
 
-                <h2 className="text-4xl font-bold">
-                  04
-                </h2>
-              </div>
+              <h2 className="mt-2 text-4xl font-bold text-[#24152f]">
+                04
+              </h2>
             </div>
 
-            <div className="card border border-base-content/10 bg-base-200">
-              <div className="card-body">
-                <p className="text-sm text-base-content/50">
-                  Places Explored
-                </p>
 
-                <h2 className="text-4xl font-bold">
-                  08
-                </h2>
-              </div>
+            <div className="rounded-3xl border border-[#e9e0f2] bg-white p-6 shadow-sm">
+              <p className="text-sm text-[#8a7b94]">
+                Places Explored
+              </p>
+
+              <h2 className="mt-2 text-4xl font-bold text-[#24152f]">
+                08
+              </h2>
             </div>
 
-            <div className="card border border-base-content/10 bg-base-200">
-              <div className="card-body">
-                <p className="text-sm text-base-content/50">
-                  Days Planned
-                </p>
 
-                <h2 className="text-4xl font-bold">
-                  21
-                </h2>
-              </div>
+            <div className="rounded-3xl border border-[#e9e0f2] bg-white p-6 shadow-sm">
+              <p className="text-sm text-[#8a7b94]">
+                Days Planned
+              </p>
+
+              <h2 className="mt-2 text-4xl font-bold text-[#24152f]">
+                21
+              </h2>
             </div>
 
           </div>
@@ -89,23 +124,27 @@ const MyTrips = () => {
 
 
       {/* Trips */}
-      <section className="px-6 py-14 md:px-10 md:py-20">
+      <section className="relative px-6 py-16 md:px-10 md:py-20">
 
         <div className="mx-auto max-w-7xl">
 
-          <div className="mb-8 flex items-center justify-between">
+          <div className="mb-8 flex items-end justify-between">
 
             <div>
-              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-primary">
+              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#EE82EE]">
                 Saved journeys
               </p>
 
-              <h2 className="mt-2 text-3xl font-bold">
+              <h2 className="mt-2 text-3xl font-bold text-[#24152f] md:text-4xl">
                 Your adventures
               </h2>
+
+              <p className="mt-2 text-sm text-[#8a7b94]">
+                Your personalized travel plans.
+              </p>
             </div>
 
-            <button className="btn btn-ghost rounded-full border border-base-content/10">
+            <button className="hidden rounded-full border border-[#e9e0f2] bg-white px-5 py-2.5 text-sm font-semibold text-[#75677f] shadow-sm transition hover:border-[#cbb5ed] hover:text-[#7c3aed] sm:block">
               Recent ↓
             </button>
 
@@ -114,158 +153,74 @@ const MyTrips = () => {
 
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
 
+            {trips.map((trip) => (
+              <div
+                key={trip.slug}
+                className="group overflow-hidden rounded-3xl border border-[#e9e0f2] bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-[#cbb5ed] hover:shadow-xl"
+              >
 
-            {/* Goa */}
-            <div className="card overflow-hidden border border-base-content/10 bg-base-200">
+                {/* Image */}
+                <div className="relative overflow-hidden">
 
-              <figure className="relative h-64">
+                  <img
+                    src={trip.image}
+                    alt={trip.name}
+                    className="h-72 w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
 
-                <img
-                  src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1000&q=80"
-                  alt="Goa"
-                  className="h-full w-full object-cover"
-                />
+                  {/* Gradient */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-70" />
 
-                <div className="absolute left-4 top-4 badge badge-primary rounded-full">
-                  Saved
-                </div>
+                  {/* Saved */}
+                  <div className="absolute left-4 top-4 rounded-full bg-white/95 px-4 py-2 text-xs font-semibold text-[#7c3aed] shadow-md">
+                    Saved
+                  </div>
 
-              </figure>
-
-              <div className="card-body">
-
-                <p className="text-sm text-base-content/50">
-                  India · 5 Days
-                </p>
-
-                <h3 className="text-2xl font-bold">
-                  Goa Escape
-                </h3>
-
-                <p className="text-sm leading-6 text-base-content/50">
-                  Beaches, food, nightlife and a relaxed coastal experience.
-                </p>
-
-                <div className="card-actions mt-3 justify-between">
-
-                  <span className="text-sm font-semibold text-primary">
-                    ₹30,000
-                  </span>
-
+                  {/* Hover */}
                   <Link
-                    to="/trip/goa"
-                    className="btn btn-sm btn-primary rounded-full"
+                    to={`/trip/${trip.slug}`}
+                    className="absolute bottom-4 right-4 translate-y-2 rounded-full bg-white/95 px-4 py-2 text-xs font-semibold text-[#7c3aed] opacity-0 shadow-md transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100"
                   >
-                    View Trip ↗
+                    View Trip →
                   </Link>
 
                 </div>
 
-              </div>
 
-            </div>
+                {/* Content */}
+                <div className="p-5">
 
+                  <p className="text-sm text-[#8a7b94]">
+                    {trip.location}
+                  </p>
 
-            {/* Kashmir */}
-            <div className="card overflow-hidden border border-base-content/10 bg-base-200">
+                  <h3 className="mt-1 text-2xl font-bold text-[#24152f] transition-colors duration-300 group-hover:text-[#800080]">
+                    {trip.name}
+                  </h3>
 
-              <figure className="relative h-64">
+                  <p className="mt-2 text-sm leading-6 text-[#75677f]">
+                    {trip.description}
+                  </p>
 
-                <img
-                  src="https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&w=1000&q=80"
-                  alt="Kashmir"
-                  className="h-full w-full object-cover"
-                />
+                  <div className="mt-5 flex items-center justify-between">
 
-                <div className="absolute left-4 top-4 badge badge-primary rounded-full">
-                  Saved
-                </div>
+                    <span className="text-sm font-bold text-[#800080]">
+                      {trip.price}
+                    </span>
 
-              </figure>
+                    <Link
+                      to={`/trip/${trip.slug}`}
+                      className="rounded-full bg-[#EE82EE] px-5 py-2.5 text-sm font-semibold text-white transition-all duration-300 hover:bg-[#d96ed9] hover:shadow-md"
+                    >
+                      View Trip ↗
+                    </Link>
 
-              <div className="card-body">
-
-                <p className="text-sm text-base-content/50">
-                  India · 6 Days
-                </p>
-
-                <h3 className="text-2xl font-bold">
-                  Kashmir Getaway
-                </h3>
-
-                <p className="text-sm leading-6 text-base-content/50">
-                  Mountains, lakes, scenic drives and peaceful landscapes.
-                </p>
-
-                <div className="card-actions mt-3 justify-between">
-
-                  <span className="text-sm font-semibold text-primary">
-                    ₹35,000
-                  </span>
-
-                  <Link
-                    to="/trip/kashmir"
-                    className="btn btn-sm btn-primary rounded-full"
-                  >
-                    View Trip ↗
-                  </Link>
+                  </div>
 
                 </div>
 
               </div>
-
-            </div>
-
-
-            {/* Bali */}
-            <div className="card overflow-hidden border border-base-content/10 bg-base-200">
-
-              <figure className="relative h-64">
-
-                <img
-                  src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1000&q=80"
-                  alt="Bali"
-                  className="h-full w-full object-cover"
-                />
-
-                <div className="absolute left-4 top-4 badge badge-primary rounded-full">
-                  Saved
-                </div>
-
-              </figure>
-
-              <div className="card-body">
-
-                <p className="text-sm text-base-content/50">
-                  Indonesia · 7 Days
-                </p>
-
-                <h3 className="text-2xl font-bold">
-                  Bali Adventure
-                </h3>
-
-                <p className="text-sm leading-6 text-base-content/50">
-                  Beaches, temples, waterfalls and unforgettable sunsets.
-                </p>
-
-                <div className="card-actions mt-3 justify-between">
-
-                  <span className="text-sm font-semibold text-primary">
-                    ₹55,000
-                  </span>
-
-                  <Link
-                    to="/trip/bali"
-                    className="btn btn-sm btn-primary rounded-full"
-                  >
-                    View Trip ↗
-                  </Link>
-
-                </div>
-
-              </div>
-
-            </div>
+            ))}
 
           </div>
 
@@ -274,29 +229,29 @@ const MyTrips = () => {
       </section>
 
 
-      {/* Empty / Create */}
+      {/* Create New Trip */}
       <section className="px-6 pb-24 md:px-10">
 
         <div className="mx-auto max-w-7xl">
 
-          <div className="rounded-[2rem] border border-dashed border-base-content/20 bg-base-200/40 px-6 py-14 text-center md:px-10">
+          <div className="rounded-[2rem] border border-dashed border-[#d8c8e8] bg-white px-6 py-14 text-center shadow-sm md:px-10">
 
-            <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-primary/10 text-xl text-primary">
+            <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-[#f3eaff] text-xl text-[#7c3aed]">
               ✦
             </div>
 
-            <h2 className="mt-5 text-2xl font-bold">
+            <h2 className="mt-5 text-2xl font-bold text-[#24152f]">
               Ready for another adventure?
             </h2>
 
-            <p className="mx-auto mt-3 max-w-lg text-sm leading-6 text-base-content/50">
+            <p className="mx-auto mt-3 max-w-lg text-sm leading-6 text-[#75677f]">
               Create another personalized itinerary and add a new journey to
               your collection.
             </p>
 
             <Link
               to="/plan"
-              className="btn btn-primary mt-6 rounded-full px-7"
+              className="mt-6 inline-flex rounded-full bg-[#EE82EE] px-7 py-3 text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#d96ed9] hover:shadow-lg"
             >
               Create New Trip ↗
             </Link>
