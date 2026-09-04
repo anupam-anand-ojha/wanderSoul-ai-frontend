@@ -61,14 +61,14 @@ const Explore = () => {
 
         <div className="relative mx-auto max-w-7xl">
 
-          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#7c3aed]">
+          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#EE82EE]">
             Explore
           </p>
 
           <h1 className="mt-4 max-w-4xl text-5xl font-bold leading-tight tracking-tight text-[#24152f] md:text-7xl">
             Find your next
             <br />
-            <span className="text-[#7c3aed]">adventure.</span>
+            <span className="text-[#EE82EE]">adventure.</span>
           </h1>
 
           <p className="mt-6 max-w-xl text-base leading-7 text-[#75677f] md:text-lg">
