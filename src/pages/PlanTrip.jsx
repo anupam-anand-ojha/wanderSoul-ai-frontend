@@ -53,59 +53,62 @@ const PlanTrip = () => {
   };
 
   return (
-   <main className="relative min-h-screen overflow-hidden bg-[#050914]">
+    <main className="relative min-h-screen overflow-hidden bg-[#faf8ff] text-[#24152f]">
 
-  {/* Animated Background */}
-  <div className="travel-bg">
+      {/* Background Glow */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
 
-    <div className="gradient-blob blob-purple"></div>
+        <div className="absolute -left-40 -top-40 h-[500px] w-[500px] rounded-full bg-[#e9ddff] opacity-60 blur-3xl" />
 
-    <div className="gradient-blob blob-blue"></div>
+        <div className="absolute -right-40 top-20 h-[450px] w-[450px] rounded-full bg-[#eee4ff] opacity-70 blur-3xl" />
 
-    <div className="gradient-blob blob-violet"></div>
+        <div className="absolute bottom-[-200px] left-1/2 h-[400px] w-[400px] -translate-x-1/2 rounded-full bg-[#f3eaff] blur-3xl" />
 
-    <div className="gradient-blob blob-pink"></div>
+      </div>
 
-    <div className="center-glow"></div>
+      <div className="relative z-10">
 
-    <div className="background-grid"></div>
-
-    <div className="background-stars"></div>
-
-  </div>
-
-  {/* Website Content */}
-  <div className="relative z-10">
         <Navbar />
 
+        {/* Hero */}
         <section className="px-6 pb-20 pt-32 md:px-10 md:pt-40">
+
           <div className="mx-auto max-w-3xl">
 
             <div className="text-center">
-              <p className="text-sm font-semibold uppercase tracking-widest text-primary">
+
+              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#A300A3]">
                 AI Trip Planner
               </p>
 
-              <h1 className="mt-3 text-5xl font-bold md:text-7xl">
+              <h1 className="mt-3 text-5xl font-bold tracking-tight text-[#24152f] md:text-7xl">
                 Create your
                 <br />
-                <span className="text-primary">perfect trip.</span>
+                <span className="text-[#A300A3]">
+                  perfect trip.
+                </span>
               </h1>
 
-              <p className="mx-auto mt-5 max-w-xl text-base text-white/50">
+              <p className="mx-auto mt-5 max-w-xl text-base leading-7 text-[#75677f] md:text-lg">
                 Tell wanderSoul what you're looking for and AI will build your
                 journey.
               </p>
+
             </div>
 
+
+            {/* Form */}
             <form
               onSubmit={handleSubmit}
-              className="mt-12 rounded-[2rem] border border-white/5 bg-[#0b111d]/80 p-6 shadow-2xl backdrop-blur-xl md:p-10"
+              className="mt-12 rounded-[2rem] border border-[#e9e0f2] bg-white p-6 shadow-xl shadow-[#7c3aed]/5 md:p-10"
             >
+
               <div className="space-y-6">
 
+                {/* Destination */}
                 <div>
-                  <label className="mb-2 block text-sm font-semibold text-white">
+
+                  <label className="mb-2 block text-sm font-semibold text-[#24152f]">
                     Destination
                   </label>
 
@@ -115,15 +118,20 @@ const PlanTrip = () => {
                     value={formData.place}
                     onChange={handleChange}
                     placeholder="Where do you want to go?"
-                    className="input input-bordered h-14 w-full rounded-2xl border-white/10 bg-white/[0.03] text-white placeholder:text-white/30"
+                    className="h-14 w-full rounded-2xl border border-[#e9e0f2] bg-[#faf8ff] px-4 text-[#24152f] outline-none transition placeholder:text-[#8a7b94] focus:border-[#A300A3] focus:ring-2 focus:ring-[#A300A3]/10"
                     required
                   />
+
                 </div>
 
+
+                {/* Duration + Budget */}
                 <div className="grid gap-6 md:grid-cols-2">
 
+                  {/* Duration */}
                   <div>
-                    <label className="mb-2 block text-sm font-semibold text-white">
+
+                    <label className="mb-2 block text-sm font-semibold text-[#24152f]">
                       Trip duration
                     </label>
 
@@ -131,7 +139,7 @@ const PlanTrip = () => {
                       name="time"
                       value={formData.time}
                       onChange={handleChange}
-                      className="select select-bordered h-14 w-full rounded-2xl border-white/10 bg-[#0d1422] text-white"
+                      className="h-14 w-full rounded-2xl border border-[#e9e0f2] bg-[#faf8ff] px-4 text-[#24152f] outline-none transition focus:border-[#A300A3] focus:ring-2 focus:ring-[#A300A3]/10"
                       required
                     >
                       <option value="">Choose duration</option>
@@ -142,10 +150,14 @@ const PlanTrip = () => {
                       <option value="10 days">10 Days</option>
                       <option value="14 days">14 Days</option>
                     </select>
+
                   </div>
 
+
+                  {/* Budget */}
                   <div>
-                    <label className="mb-2 block text-sm font-semibold text-white">
+
+                    <label className="mb-2 block text-sm font-semibold text-[#24152f]">
                       Budget
                     </label>
 
@@ -153,11 +165,13 @@ const PlanTrip = () => {
                       name="budget"
                       value={formData.budget}
                       onChange={handleChange}
-                      className="select select-bordered h-14 w-full rounded-2xl border-white/10 bg-[#0d1422] text-white"
+                      className="h-14 w-full rounded-2xl border border-[#e9e0f2] bg-[#faf8ff] px-4 text-[#24152f] outline-none transition focus:border-[#A300A3] focus:ring-2 focus:ring-[#A300A3]/10"
                       required
                     >
                       <option value="">Choose budget</option>
-                      <option value="under 10000">Under ₹10,000</option>
+                      <option value="under 10000">
+                        Under ₹10,000
+                      </option>
                       <option value="10000 - 25000">
                         ₹10,000 - ₹25,000
                       </option>
@@ -171,12 +185,16 @@ const PlanTrip = () => {
                         Above ₹1,00,000
                       </option>
                     </select>
+
                   </div>
 
                 </div>
 
+
+                {/* Travelers */}
                 <div>
-                  <label className="mb-2 block text-sm font-semibold text-white">
+
+                  <label className="mb-2 block text-sm font-semibold text-[#24152f]">
                     Travelling with?
                   </label>
 
@@ -184,7 +202,7 @@ const PlanTrip = () => {
                     name="travelers"
                     value={formData.travelers}
                     onChange={handleChange}
-                    className="select select-bordered h-14 w-full rounded-2xl border-white/10 bg-[#0d1422] text-white"
+                    className="h-14 w-full rounded-2xl border border-[#e9e0f2] bg-[#faf8ff] px-4 text-[#24152f] outline-none transition focus:border-[#A300A3] focus:ring-2 focus:ring-[#A300A3]/10"
                     required
                   >
                     <option value="">Choose one</option>
@@ -193,10 +211,14 @@ const PlanTrip = () => {
                     <option value="Friends">Friends</option>
                     <option value="Family">Family</option>
                   </select>
+
                 </div>
 
+
+                {/* Interests */}
                 <div>
-                  <label className="mb-2 block text-sm font-semibold text-white">
+
+                  <label className="mb-2 block text-sm font-semibold text-[#24152f]">
                     What do you enjoy?
                   </label>
 
@@ -205,21 +227,26 @@ const PlanTrip = () => {
                     value={formData.interests}
                     onChange={handleChange}
                     placeholder="Beaches, mountains, food, adventure, nightlife..."
-                    className="textarea textarea-bordered min-h-32 w-full rounded-2xl border-white/10 bg-white/[0.03] text-white placeholder:text-white/30"
+                    className="min-h-32 w-full rounded-2xl border border-[#e9e0f2] bg-[#faf8ff] p-4 text-[#24152f] outline-none transition placeholder:text-[#8a7b94] focus:border-[#A300A3] focus:ring-2 focus:ring-[#A300A3]/10"
                     required
                   />
+
                 </div>
 
+
+                {/* Error */}
                 {error && (
-                  <div className="alert alert-error rounded-2xl">
-                    <span>{error}</span>
+                  <div className="rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-600">
+                    {error}
                   </div>
                 )}
 
+
+                {/* Submit */}
                 <button
                   type="submit"
                   disabled={loading}
-                  className="btn btn-primary h-14 w-full rounded-full text-base shadow-lg shadow-primary/20"
+                  className="flex h-14 w-full items-center justify-center gap-2 rounded-full bg-[#A300A3] text-base font-semibold text-white shadow-lg shadow-[#A300A3]/20 transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#800080] hover:shadow-xl hover:shadow-[#A300A3]/20 disabled:cursor-not-allowed disabled:opacity-70"
                 >
                   {loading ? (
                     <>
@@ -238,7 +265,9 @@ const PlanTrip = () => {
             </form>
 
           </div>
+
         </section>
+
       </div>
     </main>
   );
