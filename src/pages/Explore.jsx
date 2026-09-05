@@ -121,7 +121,7 @@ const Explore = () => {
 
                 {/* Content */}
                 <div className="p-5">
-                  <h3 className="text-xl font-bold text-[#24152f] transition-colors duration-300 group-hover:text-[#7c3aed]">
+                  <h3 className="text-xl font-bold text-[#24152f] transition-colors duration-300 group-hover:text-[#800080]">
                     {destination.name}
                   </h3>
 
