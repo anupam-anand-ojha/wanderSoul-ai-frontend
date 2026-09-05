@@ -67,7 +67,7 @@ const About = () => {
 
 
           {/* Experience */}
-          <div className="rounded-[2rem] bg-[#800080] p-8 text-white shadow-sm md:p-10">
+          <div className="rounded-[2rem] bg-gradient-to-r from-[#800080] to-[#EE82EE] p-8 text-white shadow-sm md:p-10">
 
             <p className="text-sm font-semibold text-white/70">
               The experience
