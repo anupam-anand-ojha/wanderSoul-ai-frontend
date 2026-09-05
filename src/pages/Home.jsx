@@ -4,8 +4,8 @@ import { useState } from "react";
 
 const Home = () => {
   const videos = [
-    "/videos/travel-2.mp4",
     "/videos/travel-1.mp4",
+    "/videos/travel-2.mp4",
     "/videos/travel-3.mp4",
   ];
 

@@ -67,7 +67,7 @@ const MyTrips = () => {
 
             <Link
               to="/plan"
-              className="w-fit rounded-full bg-[#EE82EE] px-7 py-3 text-sm font-semibold text-white shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#d96ed9] hover:shadow-lg"
+              className="w-fit rounded-full  bg-gradient-to-r from-[#800080] to-[#EE82EE] px-7 py-3 text-sm font-semibold text-white shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#EE82EE] hover:shadow-lg"
             >
               Plan New Trip ↗
             </Link>
