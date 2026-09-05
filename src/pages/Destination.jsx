@@ -52,18 +52,26 @@ const Destination = () => {
 
   if (!destination) {
     return (
-      <main className="min-h-screen bg-base-100">
+      <main className="min-h-screen bg-[#faf7ff] text-[#24152f]">
         <Navbar />
 
-        <div className="flex min-h-screen items-center justify-center">
+        <div className="flex min-h-screen items-center justify-center px-6">
           <div className="text-center">
-            <h1 className="text-3xl font-bold">
+            <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-2xl bg-[#eee4ff] text-2xl">
+              ✦
+            </div>
+
+            <h1 className="text-3xl font-bold md:text-4xl">
               Destination not found
             </h1>
 
+            <p className="mt-3 text-[#6f5b82]">
+              We couldn't find the destination you're looking for.
+            </p>
+
             <Link
               to="/explore"
-              className="btn btn-primary mt-5 rounded-full"
+              className="mt-7 inline-flex items-center rounded-full bg-[#6d20d9] px-7 py-3 font-semibold text-white shadow-lg shadow-purple-300/30 transition hover:bg-[#5c18bd]"
             >
               Back to Explore
             </Link>
@@ -74,44 +82,121 @@ const Destination = () => {
   }
 
   return (
-    <main className="min-h-screen bg-base-100">
+    <main className="min-h-screen overflow-hidden bg-[#faf7ff] text-[#24152f]">
       <Navbar />
 
-      <section className="px-6 pb-20 pt-28 md:px-10">
+      {/* Background glow */}
+      <div className="pointer-events-none fixed inset-0 -z-0 overflow-hidden">
+        <div className="absolute -left-40 top-20 h-96 w-96 rounded-full bg-[#d8b4fe]/30 blur-3xl" />
+
+        <div className="absolute -right-40 top-60 h-[28rem] w-[28rem] rounded-full bg-[#c084fc]/25 blur-3xl" />
+
+        <div className="absolute bottom-0 left-1/3 h-80 w-80 rounded-full bg-[#eadcff]/60 blur-3xl" />
+      </div>
+
+      <section className="relative z-10 px-5 pb-20 pt-28 md:px-10 md:pt-32">
         <div className="mx-auto max-w-6xl">
 
-          <div className="relative overflow-hidden rounded-[2rem]">
+          {/* Hero Card */}
+          <div className="relative overflow-hidden rounded-[2rem] border border-white/70 bg-white/40 shadow-[0_20px_70px_rgba(103,43,155,0.18)] backdrop-blur-sm md:rounded-[2.5rem]">
 
+            {/* Image */}
             <img
               src={destination.image}
               alt={destination.name}
-              className="h-[70vh] w-full object-cover"
+              className="h-[65vh] min-h-[500px] w-full object-cover"
             />
 
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
+            {/* Purple overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-[#241033]/90 via-[#3b1757]/20 to-transparent" />
 
-            <div className="absolute bottom-8 left-8 text-white md:bottom-12 md:left-12">
+            {/* Soft purple tint */}
+            <div className="absolute inset-0 bg-gradient-to-br from-[#8b5cf6]/10 via-transparent to-[#c084fc]/20" />
 
-              <p className="text-sm uppercase tracking-widest text-white/60">
+            {/* Floating badge */}
+            <div className="absolute left-6 top-6 md:left-8 md:top-8">
+              <div className="rounded-full border border-white/30 bg-white/15 px-5 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-white backdrop-blur-md">
+                ✦ AI Travel Destination
+              </div>
+            </div>
+
+            {/* Content */}
+            <div className="absolute bottom-0 left-0 right-0 p-7 md:p-12">
+
+              <p className="text-sm font-medium uppercase tracking-[0.25em] text-white/70">
                 {destination.country}
               </p>
 
-              <h1 className="mt-2 text-6xl font-bold md:text-8xl">
+              <h1 className="mt-2 text-6xl font-extrabold tracking-tight text-white md:text-8xl">
                 {destination.name}
-                <span className="text-primary">.</span>
+                <span className="text-[#c084fc]">.</span>
               </h1>
+
+              <p className="mt-4 max-w-xl text-sm leading-6 text-white/75 md:text-base">
+                Discover the best places, experiences and hidden gems in{" "}
+                {destination.name}. Let AI create a personalized trip
+                designed around you.
+              </p>
 
               <Link
                 to={`/plan?place=${destination.name}`}
-                className="btn btn-primary mt-6 rounded-full px-7"
+                className="mt-7 inline-flex items-center gap-2 rounded-full bg-[#7625d9] px-7 py-3.5 font-semibold text-white shadow-xl shadow-purple-950/20 transition duration-300 hover:-translate-y-0.5 hover:bg-[#6520bd]"
               >
-                Plan with AI ✦
+                Plan with AI
+                <span className="text-lg">✦</span>
               </Link>
+            </div>
+          </div>
 
+          {/* Bottom Info Cards */}
+          <div className="mt-8 grid gap-5 md:grid-cols-3">
+
+            <div className="rounded-3xl border border-[#eadcf8] bg-white/70 p-6 shadow-[0_12px_40px_rgba(103,43,155,0.08)] backdrop-blur-sm">
+              <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-2xl bg-[#eee3ff] text-[#6d20d9]">
+                ✦
+              </div>
+
+              <h3 className="text-lg font-bold">
+                AI Planned
+              </h3>
+
+              <p className="mt-2 text-sm leading-6 text-[#75617f]">
+                Get an itinerary generated around your interests, budget and
+                travel style.
+              </p>
+            </div>
+
+            <div className="rounded-3xl border border-[#eadcf8] bg-white/70 p-6 shadow-[0_12px_40px_rgba(103,43,155,0.08)] backdrop-blur-sm">
+              <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-2xl bg-[#eee3ff] text-[#6d20d9]">
+                ♡
+              </div>
+
+              <h3 className="text-lg font-bold">
+                Made for You
+              </h3>
+
+              <p className="mt-2 text-sm leading-6 text-[#75617f]">
+                Your trip is personalized instead of following a generic
+                travel plan.
+              </p>
+            </div>
+
+            <div className="rounded-3xl border border-[#eadcf8] bg-white/70 p-6 shadow-[0_12px_40px_rgba(103,43,155,0.08)] backdrop-blur-sm">
+              <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-2xl bg-[#eee3ff] text-[#6d20d9]">
+                ✈
+              </div>
+
+              <h3 className="text-lg font-bold">
+                Explore More
+              </h3>
+
+              <p className="mt-2 text-sm leading-6 text-[#75617f]">
+                Find experiences, attractions and places worth adding to your
+                journey.
+              </p>
             </div>
 
           </div>
-
         </div>
       </section>
     </main>
