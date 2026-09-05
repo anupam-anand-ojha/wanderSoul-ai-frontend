@@ -52,7 +52,7 @@ const Home = () => {
                 Your next
                 <br />
 
-                <span className="bg-gradient-to-r from-[#EE82EE] to-[#800080] bg-clip-text text-transparent">
+                <span className="bg-[#EE82EE] bg-clip-text text-transparent">
                   adventure
                 </span>
 

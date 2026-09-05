@@ -15,9 +15,9 @@ const Navbar = () => {
       <div className="navbar-start">
         <Link
           to="/"
-          className="text-2xl font-bold tracking-tight text-[#24152f]"
+          className="text-2xl font-bold tracking-tight text-[#EE82EE]"
         >
-          wander<span className="text-[#EE82EE]">Soul</span>
+          wander<span className="text-[#B69191]">Soul</span>
         </Link>
       </div>
 
