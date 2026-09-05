@@ -28,7 +28,7 @@ const TripResult = () => {
               No trip found
             </h1>
 
-            <p className="mx-auto mt-4 max-w-md text-[#24152f]/60">
+            <p className="mx-auto mt-4 max-w-md text-[#24152f]/70">
               Create a personalized journey with wanderSoul and let AI plan your
               next adventure.
             </p>
@@ -76,7 +76,7 @@ const TripResult = () => {
               </span>
             </h1>
 
-            <p className="mx-auto mt-7 max-w-3xl text-base leading-7 text-[#24152f]/60 md:text-lg">
+            <p className="mx-auto mt-7 max-w-3xl text-base leading-7 text-[#24152f]/70 md:text-lg">
               {trip.summary}
             </p>
           </div>
@@ -92,7 +92,7 @@ const TripResult = () => {
                   </div>
 
                   <div>
-                    <p className="text-sm text-[#24152f]/50">Duration</p>
+                    <p className="text-sm text-[#24152f]/65">Duration</p>
 
                     <p className="mt-1 font-bold text-[#24152f]">
                       {trip.itinerary?.length || 0} Days
@@ -111,7 +111,7 @@ const TripResult = () => {
                   </div>
 
                   <div>
-                    <p className="text-sm text-[#24152f]/50">
+                    <p className="text-sm text-[#24152f]/65">
                       Estimated Budget
                     </p>
 
@@ -132,7 +132,7 @@ const TripResult = () => {
                   </div>
 
                   <div>
-                    <p className="text-sm text-[#24152f]/50">Best Time</p>
+                    <p className="text-sm text-[#24152f]/65">Best Time</p>
 
                     <p className="mt-1 font-bold text-[#24152f]">
                       {trip.bestTimeToVisit}
@@ -158,7 +158,7 @@ const TripResult = () => {
                 </span>
               </h2>
 
-              <p className="mt-5 max-w-xl text-base leading-7 text-[#24152f]/60">
+              <p className="mt-5 max-w-xl text-base leading-7 text-[#24152f]/70">
                 A personalized day-by-day journey designed around your trip.
               </p>
             </div>
@@ -194,14 +194,14 @@ const TripResult = () => {
                           <MapPin size={16} />
                         </div>
 
-                        <h4 className="font-bold">Places</h4>
+                        <h4 className="font-bold text-[#24152f]">Places</h4>
                       </div>
 
                       <div className="flex flex-wrap gap-2">
                         {day.places?.map((place, i) => (
                           <span
                             key={i}
-                            className="rounded-full border border-[#800080]/10 bg-[#faf7ff] px-4 py-2 text-sm font-medium text-[#24152f]/70 transition hover:border-[#800080]/25 hover:bg-[#800080]/5"
+                            className="rounded-full border border-[#800080]/10 bg-[#faf7ff] px-4 py-2 text-sm font-medium text-[#24152f]/80 transition hover:border-[#800080]/25 hover:bg-[#800080]/5"
                           >
                             {place}
                           </span>
@@ -216,14 +216,14 @@ const TripResult = () => {
                           <ArrowRight size={16} />
                         </div>
 
-                        <h4 className="font-bold">Activities</h4>
+                        <h4 className="font-bold text-[#24152f]">Activities</h4>
                       </div>
 
                       <div className="space-y-3">
                         {day.activities?.map((activity, i) => (
                           <div
                             key={i}
-                            className="rounded-2xl border border-[#800080]/10 bg-[#faf7ff] p-4 text-sm leading-6 text-[#24152f]/60 transition duration-300 hover:border-[#800080]/20 hover:bg-[#800080]/5"
+                            className="rounded-2xl border border-[#800080]/10 bg-[#faf7ff] p-4 text-sm leading-6 text-[#24152f]/80 transition duration-300 hover:border-[#800080]/20 hover:bg-[#800080]/5"
                           >
                             {activity}
                           </div>
@@ -258,7 +258,9 @@ const TripResult = () => {
                   <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
                     {/* Hotel */}
                     <div className="rounded-2xl border border-[#800080]/10 bg-[#faf7ff] p-5">
-                      <p className="text-sm text-[#24152f]/50">Hotel</p>
+                      <p className="text-sm font-medium text-[#24152f]/65">
+                        Hotel
+                      </p>
 
                       <p className="mt-2 text-xl font-bold text-[#24152f]">
                         ₹{trip.budget.hotel?.toLocaleString()}
@@ -267,7 +269,9 @@ const TripResult = () => {
 
                     {/* Food */}
                     <div className="rounded-2xl border border-[#800080]/10 bg-[#faf7ff] p-5">
-                      <p className="text-sm text-[#24152f]/50">Food</p>
+                      <p className="text-sm font-medium text-[#24152f]/65">
+                        Food
+                      </p>
 
                       <p className="mt-2 text-xl font-bold text-[#24152f]">
                         ₹{trip.budget.food?.toLocaleString()}
@@ -276,7 +280,9 @@ const TripResult = () => {
 
                     {/* Travel */}
                     <div className="rounded-2xl border border-[#800080]/10 bg-[#faf7ff] p-5">
-                      <p className="text-sm text-[#24152f]/50">Travel</p>
+                      <p className="text-sm font-medium text-[#24152f]/65">
+                        Travel
+                      </p>
 
                       <p className="mt-2 text-xl font-bold text-[#24152f]">
                         ₹{trip.budget.travel?.toLocaleString()}
@@ -285,9 +291,9 @@ const TripResult = () => {
 
                     {/* Total */}
                     <div className="rounded-2xl bg-gradient-to-br from-[#800080] to-[#EE82EE] p-5 text-white shadow-lg shadow-[#800080]/20">
-                      <p className="text-sm text-white/70">Total</p>
+                      <p className="text-sm font-medium text-white/80">Total</p>
 
-                      <p className="mt-2 text-2xl font-bold">
+                      <p className="mt-2 text-2xl font-bold text-white">
                         ₹{trip.budget.total?.toLocaleString()}
                       </p>
                     </div>
@@ -326,7 +332,7 @@ const TripResult = () => {
                           <Lightbulb size={20} />
                         </div>
 
-                        <p className="leading-7 text-[#24152f]/60">{tip}</p>
+                        <p className="leading-7 text-[#24152f]/70">{tip}</p>
                       </div>
                     </div>
                   </div>
@@ -338,17 +344,17 @@ const TripResult = () => {
           {/* ================= FINAL CTA ================= */}
           <section className="relative mt-24 overflow-hidden rounded-[2rem] bg-gradient-to-r from-[#800080] to-[#EE82EE] px-7 py-16 text-white shadow-2xl shadow-[#800080]/20 md:px-14 md:py-24">
             <div className="relative z-10 max-w-3xl">
-              <p className="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-white/70">
+              <p className="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-white/80">
                 Your journey starts here
               </p>
 
-              <h2 className="text-4xl font-bold leading-tight tracking-tight md:text-6xl">
+              <h2 className="text-4xl font-bold leading-tight tracking-tight text-white md:text-6xl">
                 Ready for your
                 <br />
                 next adventure?
               </h2>
 
-              <p className="mt-5 max-w-xl text-base leading-7 text-white/70">
+              <p className="mt-5 max-w-xl text-base leading-7 text-white/80">
                 Create another personalized journey and let wanderSoul plan the
                 details for you.
               </p>
