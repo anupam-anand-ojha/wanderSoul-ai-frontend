@@ -60,12 +60,12 @@ const Home = () => {
                 awaits.
               </h1>
 
-              <p className="mt-7 max-w-xl text-base leading-7 text-white/70 md:text-lg">
+              <p className="mt-10 md:mt-7 max-w-xl text-xl text-base leading-7 text-white/70 md:text-lg">
                 Tell us where you want to go, what you love, and your budget.
                 wanderSoul creates a personalized journey made just for you.
               </p>
 
-              <div className="mt-9 flex flex-wrap gap-3">
+              <div className="mt-30 md:mt-9 flex flex-wrap gap-7 md:gap-3">
 
                 <Link
                   to="/plan"
