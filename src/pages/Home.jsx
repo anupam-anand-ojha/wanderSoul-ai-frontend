@@ -40,11 +40,11 @@ const Home = () => {
         <Navbar />
 
         {/* Hero Content */}
-        <div className="relative z-10 flex min-h-screen md:items-center px-6 pt-30 md:pt-20 md:px-10">
+        <div className="relative z-10 flex min-h-screen md:items-center px-6 pt-50 md:pt-20 md:px-10">
           <div className="mx-auto w-full max-w-7xl">
             <div className="max-w-3xl">
 
-              <div className=" mb-10 md:mb-6 inline-flex rounded-full border border-[#EE82EE]/40 bg-[#800080]/20 px-4 py-3 text-sm text-[#EE82EE] backdrop-blur-md">
+              <div className=" mb-10 md:mb-6 hidden md:inline-flex rounded-full border border-[#EE82EE]/40 bg-[#800080]/20 px-4 py-3 text-sm text-[#EE82EE] backdrop-blur-md">
                 AI-powered travel planning
               </div>
 
@@ -60,12 +60,15 @@ const Home = () => {
                 awaits.
               </h1>
 
-              <p className="mt-10 md:mt-7 max-w-xl text-xl text-base leading-7 text-white/70 md:text-lg">
+              <p className="mt-10 md:mt-7 max-w-xl text-lg text-base leading-7 text-white/70 md:text-lg">
                 Tell us where you want to go, what you love, and your budget.
-                wanderSoul creates a personalized journey made just for you.
+                wanderSoul AI creates a personalized journey from destinations to activities and everything in between
+                 made just for you.
+               
+                
               </p>
 
-              <div className="mt-30 md:mt-9 flex flex-wrap gap-7 md:gap-3">
+              <div className="mt-14 md:mt-9 flex flex-wrap gap-4 md:gap-3">
 
                 <Link
                   to="/plan"
@@ -88,7 +91,7 @@ const Home = () => {
         </div>
 
         {/* Scroll */}
-        <div className="absolute bottom-8 left-1/2 z-20 hidden -translate-x-1/2 items-center gap-3 text-xs uppercase tracking-[0.3em] text-white/50 md:flex">
+        <div className="absolute bottom-8 left-1/2 z-20 -translate-x-1/2 items-center gap-3 text-xs uppercase tracking-[0.2em] md:tracking-[0.3em] text-white/50 md:flex">
           Scroll to explore
           <span className="text-[#EE82EE]">↓</span>
         </div>
