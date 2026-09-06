@@ -10,7 +10,6 @@ const Navbar = () => {
 
   return (
     <div className="navbar fixed left-0 top-0 z-50 w-full bg-transparent px-5 py-4 md:px-10">
-
       {/* Logo */}
       <div className="navbar-start">
         <Link
@@ -24,7 +23,6 @@ const Navbar = () => {
       {/* Desktop Menu */}
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal gap-2 rounded-full border border-[#e9e0f2] bg-white/75 px-2 shadow-sm backdrop-blur-md">
-
           {navItems.map((item) => (
             <li key={item.path}>
               <NavLink
@@ -41,13 +39,11 @@ const Navbar = () => {
               </NavLink>
             </li>
           ))}
-
         </ul>
       </div>
 
       {/* Right */}
       <div className="navbar-end">
-
         {/* Plan Button */}
         <Link
           to="/plan"
@@ -57,45 +53,53 @@ const Navbar = () => {
           <span>↗</span>
         </Link>
 
-        {/* Mobile Menu */}
-        <div className="dropdown dropdown-end lg:hidden">
+        {/* Mobile Navbar */}
+        <div className="absolute left-4 right-4 top-4 z-50 lg:hidden">
+          <div className="flex items-center justify-between rounded-2xl border border-white/20 bg-white/10 px-4 py-2.5 shadow-lg backdrop-blur-xl">
+            {/* Logo */}
+            <Link
+              to="/"
+              className="text-xl font-bold tracking-tight text-white"
+            >
+              wander<span className="text-[#EE82EE]">Soul</span>
+            </Link>
 
-          <button
-            tabIndex={0}
-            className="btn btn-circle border border-[#e9e0f2] bg-white/80 text-[#3b2057] shadow-sm backdrop-blur-md hover:bg-white"
-          >
-            ☰
-          </button>
-
-          <ul
-            tabIndex={0}
-            className="menu dropdown-content mt-3 w-52 rounded-2xl border border-[#e9e0f2] bg-white/95 p-3 text-[#3b2057] shadow-xl backdrop-blur-md"
-          >
-
-            {navItems.map((item) => (
-              <li key={item.path}>
-                <Link
-                  to={item.path}
-                  className="rounded-xl hover:bg-[#f3eaff] hover:text-[#7c3aed]"
-                >
-                  {item.name}
-                </Link>
-              </li>
-            ))}
-
-            <li className="mt-2">
-              <Link
-                to="/plan"
-                className="rounded-xl bg-[#EE82EE] text-center font-semibold text-white hover:bg-[#d96ed9]"
+            {/* Mobile Menu */}
+            <div className="dropdown dropdown-end">
+              <button
+                tabIndex={0}
+                className="btn btn-circle h-10 min-h-10 w-10 border border-white/20 bg-white/80 text-[#3b2057] shadow-sm backdrop-blur-md hover:bg-white"
               >
-                Plan a Trip ↗
-              </Link>
-            </li>
+                ☰
+              </button>
 
-          </ul>
+              <ul
+                tabIndex={0}
+                className="menu dropdown-content mt-3 w-52 rounded-2xl border border-white/20 bg-white/95 p-3 text-[#3b2057] shadow-xl backdrop-blur-xl"
+              >
+                {navItems.map((item) => (
+                  <li key={item.path}>
+                    <Link
+                      to={item.path}
+                      className="rounded-xl hover:bg-[#f3eaff] hover:text-[#7c3aed]"
+                    >
+                      {item.name}
+                    </Link>
+                  </li>
+                ))}
 
+                <li className="mt-2">
+                  <Link
+                    to="/plan"
+                    className="rounded-xl bg-[#EE82EE] text-center font-semibold text-white hover:bg-[#d96ed9]"
+                  >
+                    Plan a Trip ↗
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
-
       </div>
     </div>
   );
