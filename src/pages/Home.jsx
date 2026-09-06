@@ -26,6 +26,7 @@ const Home = () => {
           autoPlay
           muted
           playsInline
+          preload="auto"
           onEnded={handleVideoEnd}
           className="absolute inset-0 h-full w-full object-cover"
         >
