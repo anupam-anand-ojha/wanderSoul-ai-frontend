@@ -54,9 +54,8 @@ const Navbar = () => {
         </Link>
 
         {/* Mobile Navbar */}
-        <div className="absolute left-4 right-4 top-4 z-50 lg:hidden">
-          <div className="flex items-center justify-between rounded-2xl border border-white/20 bg-white/10 px-4 py-2.5 shadow-lg backdrop-blur-xl">
-            {/* Logo */}
+        <div className="absolute left-3 right-3 top-4 z-50 lg:hidden">
+          <div className="flex items-center justify-between rounded-full border border-white/15 bg-black/25 px-4 py-2.5 backdrop-blur-xl">
             <Link
               to="/"
               className="text-xl font-bold tracking-tight text-white"
@@ -64,24 +63,23 @@ const Navbar = () => {
               wander<span className="text-[#EE82EE]">Soul</span>
             </Link>
 
-            {/* Mobile Menu */}
             <div className="dropdown dropdown-end">
               <button
                 tabIndex={0}
-                className="btn btn-circle h-10 min-h-10 w-10 border border-white/20 bg-white/80 text-[#3b2057] shadow-sm backdrop-blur-md hover:bg-white"
+                className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-[#24152f] shadow-lg"
               >
                 ☰
               </button>
 
               <ul
                 tabIndex={0}
-                className="menu dropdown-content mt-3 w-52 rounded-2xl border border-white/20 bg-white/95 p-3 text-[#3b2057] shadow-xl backdrop-blur-xl"
+                className="menu dropdown-content mt-3 w-52 rounded-2xl border border-white/20 bg-black/80 p-3 text-white shadow-2xl backdrop-blur-2xl"
               >
                 {navItems.map((item) => (
                   <li key={item.path}>
                     <Link
                       to={item.path}
-                      className="rounded-xl hover:bg-[#f3eaff] hover:text-[#7c3aed]"
+                      className="rounded-xl hover:bg-white/10 hover:text-[#EE82EE]"
                     >
                       {item.name}
                     </Link>
@@ -91,7 +89,7 @@ const Navbar = () => {
                 <li className="mt-2">
                   <Link
                     to="/plan"
-                    className="rounded-xl bg-[#EE82EE] text-center font-semibold text-white hover:bg-[#d96ed9]"
+                    className="rounded-xl bg-gradient-to-r from-[#800080] to-[#EE82EE] text-center font-semibold text-white"
                   >
                     Plan a Trip ↗
                   </Link>
