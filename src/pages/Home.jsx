@@ -21,7 +21,7 @@ const Home = () => {
       {/* ================= HERO ================= */}
       <section className="relative min-h-screen overflow-hidden">
         {/* Background Video */}
-        <video
+        <video 
           key={videos[currentVideo]}
           autoPlay
           muted
@@ -34,7 +34,7 @@ const Home = () => {
 
         {/* Video Overlay */}
         <div className="absolute inset-0 bg-black/55"></div>
-        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-black/10"></div>
+       
 
         {/* Navbar */}
         <Navbar />
