@@ -16,12 +16,12 @@ const Home = () => {
   };
 
   return (
-    <main className="min-h-screen bg-[#faf7ff] text-[#24152f]">
+    <main className="min-h-screen bg-[url('/bg1.jpg')] bg-cover bg-center bg-fixed text-[#24152f]">
 
       {/* ================= HERO ================= */}
       <section className="relative min-h-screen overflow-hidden">
         {/* Background Video */}
-        <video 
+        <video hidden
           key={videos[currentVideo]}
           autoPlay
           muted
