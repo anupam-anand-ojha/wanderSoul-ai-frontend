@@ -21,7 +21,7 @@ const Home = () => {
       <section className="relative min-h-screen overflow-hidden">
         {/* Background Image */}
         <img
-          src="/bg1.jpg"
+          src="/bg1.webp"
           alt=""
           className="absolute inset-0 h-full w-full object-cover"
         />
