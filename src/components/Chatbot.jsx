@@ -99,7 +99,7 @@ const Chatbot = () => {
                 <div
                   className={`chat-bubble ${
                     message.role === "user"
-                      ? "bg-purple-600 text-white"
+                      ? "bg-white-600 text-white"
                       : "bg-base-200"
                   }`}
                 >
@@ -127,7 +127,7 @@ const Chatbot = () => {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder="Ask about travel..."
-              className="input input-bordered flex-1"
+              className="input input-bordered flex-1 text-white placeholder:text-white/40"
             />
 
             <button
