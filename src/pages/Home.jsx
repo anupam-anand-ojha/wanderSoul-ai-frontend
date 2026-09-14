@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import { useState } from "react";
+import Chatbot from "../components/Chatbot";
 
 const Home = () => {
   const videos = [
@@ -350,6 +351,10 @@ const Home = () => {
           </div>
         </div>
       </section>
+
+
+      <Chatbot />
+      
     </main>
   );
 };
