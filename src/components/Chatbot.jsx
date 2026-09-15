@@ -127,7 +127,7 @@ const Chatbot = () => {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder="Ask about travel..."
-              className="input input-bordered flex-1 text-white placeholder:text-white/40"
+              className="input input-bordered flex-1 text-white placeholder:text-white/45"
             />
 
             <button
