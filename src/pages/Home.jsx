@@ -17,7 +17,7 @@ const Home = () => {
   };
 
   return (
-    <main className="min-h-screen bg-[#faf7ff] text-[#24152f]">
+    <main className="bg-[#faf7ff] text-[#24152f]">
       {/* ================= HERO ================= */}
       <section className="relative min-h-screen overflow-hidden">
         {/* Background Image */}
