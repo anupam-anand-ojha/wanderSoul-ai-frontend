@@ -140,3 +140,7 @@
     transform: translate(80px, 40px);
   }
 }
+
+html {
+  scroll-behavior: smooth;
+}
