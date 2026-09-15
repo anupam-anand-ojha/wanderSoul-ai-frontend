@@ -34,7 +34,7 @@ const Home = () => {
         <Navbar />
 
         {/* Hero Content */}
-        <div className="relative z-10 flex min-h-svh md:items-center px-6 pt-46 md:pt-20 md:px-10">
+        <div className="relative z-10 flex min-h-svh md:items-center px-6 pt-32 md:pt-20 md:px-10">
           <div className="mx-auto w-full max-w-7xl">
             <div className="max-w-3xl">
               <div className=" mb-10 md:mb-6 hidden md:inline-flex rounded-full border border-[#EE82EE]/40 bg-[#800080]/20 px-4 py-3 text-sm text-[#EE82EE] backdrop-blur-md">
