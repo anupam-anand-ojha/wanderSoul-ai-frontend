@@ -19,7 +19,7 @@ const Home = () => {
   return (
     <main className="bg-[#faf7ff] text-[#24152f]">
       {/* ================= HERO ================= */}
-      <section className="relative min-h-screen overflow-hidden">
+      <section className="relative min-h-svh overflow-hidden">
         {/* Background Image */}
         <img
           src="/bg1.webp"
