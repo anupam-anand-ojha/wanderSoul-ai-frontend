@@ -1,5 +1,4 @@
 import { useState } from "react";
-import axios from "axios";
 import { FaRobot, FaPaperPlane, FaXmark } from "react-icons/fa6";
 
 const Chatbot = () => {
@@ -26,34 +25,76 @@ const Chatbot = () => {
 
     const updatedMessages = [...messages, userMessage];
 
-    setMessages(updatedMessages);
+    setMessages([
+      ...updatedMessages,
+      {
+        role: "assistant",
+        content: "",
+      },
+    ]);
+
     setInput("");
     setLoading(true);
 
     try {
-      const { data } = await axios.post(
+      const response = await fetch(
         `${import.meta.env.VITE_API_URL}/chat`,
         {
-          message: userMessage.content,
-          history: messages,
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            message: userMessage.content,
+            history: messages,
+          }),
         }
       );
 
-      setMessages([
-        ...updatedMessages,
-        {
-          role: "assistant",
-          content: data.reply,
-        },
-      ]);
+      if (!response.ok || !response.body) {
+        throw new Error("Streaming failed");
+      }
+
+      const reader = response.body.getReader();
+      const decoder = new TextDecoder();
+
+      let assistantReply = "";
+
+      while (true) {
+        const { done, value } = await reader.read();
+
+        if (done) break;
+
+        const chunk = decoder.decode(value, {
+          stream: true,
+        });
+
+        assistantReply += chunk;
+
+        setMessages((prev) => {
+          const updated = [...prev];
+
+          updated[updated.length - 1] = {
+            role: "assistant",
+            content: assistantReply,
+          };
+
+          return updated;
+        });
+      }
     } catch (error) {
-      setMessages([
-        ...updatedMessages,
-        {
+      console.error(error);
+
+      setMessages((prev) => {
+        const updated = [...prev];
+
+        updated[updated.length - 1] = {
           role: "assistant",
           content: "Sorry, something went wrong. Please try again.",
-        },
-      ]);
+        };
+
+        return updated;
+      });
     } finally {
       setLoading(false);
     }
@@ -61,7 +102,6 @@ const Chatbot = () => {
 
   return (
     <>
-      {/* Chat Button */}
       {!open && (
         <button
           onClick={() => setOpen(true)}
@@ -71,15 +111,16 @@ const Chatbot = () => {
         </button>
       )}
 
-      {/* Chat Box */}
       {open && (
         <div className="fixed bottom-6 right-6 z-50 w-[350px] h-[500px] bg-base-100 rounded-2xl shadow-2xl border border-base-300 flex flex-col overflow-hidden">
-          
+
           {/* Header */}
           <div className="bg-purple-600 text-white px-4 py-3 flex items-center justify-between">
             <div>
               <h3 className="font-bold">WanderSoul AI</h3>
-              <p className="text-xs opacity-80">Your travel assistant</p>
+              <p className="text-xs opacity-80">
+                Your travel assistant
+              </p>
             </div>
 
             <button onClick={() => setOpen(false)}>
@@ -93,13 +134,15 @@ const Chatbot = () => {
               <div
                 key={index}
                 className={`chat ${
-                  message.role === "user" ? "chat-end" : "chat-start"
+                  message.role === "user"
+                    ? "chat-end"
+                    : "chat-start"
                 }`}
               >
                 <div
                   className={`chat-bubble ${
                     message.role === "user"
-                      ? "bg-white-600 text-white"
+                      ? "bg-purple-600 text-white"
                       : "bg-base-200"
                   }`}
                 >
@@ -138,6 +181,7 @@ const Chatbot = () => {
               <FaPaperPlane />
             </button>
           </form>
+
         </div>
       )}
     </>
