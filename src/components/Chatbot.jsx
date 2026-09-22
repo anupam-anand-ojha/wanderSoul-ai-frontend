@@ -65,11 +65,9 @@ const Chatbot = () => {
 
         if (done) break;
 
-        const chunk = decoder.decode(value, {
+        assistantReply += decoder.decode(value, {
           stream: true,
         });
-
-        assistantReply += chunk;
 
         setMessages((prev) => {
           const updated = [...prev];
@@ -82,8 +80,22 @@ const Chatbot = () => {
           return updated;
         });
       }
+
+      // Flush any remaining decoder content
+      assistantReply += decoder.decode();
+
+      setMessages((prev) => {
+        const updated = [...prev];
+
+        updated[updated.length - 1] = {
+          role: "assistant",
+          content: assistantReply,
+        };
+
+        return updated;
+      });
     } catch (error) {
-      console.error(error);
+      console.error("Chat error:", error);
 
       setMessages((prev) => {
         const updated = [...prev];
@@ -102,6 +114,7 @@ const Chatbot = () => {
 
   return (
     <>
+      {/* Chat Button */}
       {!open && (
         <button
           onClick={() => setOpen(true)}
@@ -111,6 +124,7 @@ const Chatbot = () => {
         </button>
       )}
 
+      {/* Chat Box */}
       {open && (
         <div className="fixed bottom-6 right-6 z-50 w-[350px] h-[500px] bg-base-100 rounded-2xl shadow-2xl border border-base-300 flex flex-col overflow-hidden">
 
@@ -118,6 +132,7 @@ const Chatbot = () => {
           <div className="bg-purple-600 text-white px-4 py-3 flex items-center justify-between">
             <div>
               <h3 className="font-bold">WanderSoul AI</h3>
+
               <p className="text-xs opacity-80">
                 Your travel assistant
               </p>
@@ -151,13 +166,15 @@ const Chatbot = () => {
               </div>
             ))}
 
-            {loading && (
-              <div className="chat chat-start">
-                <div className="chat-bubble bg-base-200">
-                  <span className="loading loading-dots loading-sm"></span>
+            {/* Loading */}
+            {loading &&
+              messages[messages.length - 1]?.content === "" && (
+                <div className="chat chat-start">
+                  <div className="chat-bubble bg-base-200">
+                    <span className="loading loading-dots loading-sm"></span>
+                  </div>
                 </div>
-              </div>
-            )}
+              )}
           </div>
 
           {/* Input */}
