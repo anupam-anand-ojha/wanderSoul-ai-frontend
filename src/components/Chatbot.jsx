@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { FaRobot, FaPaperPlane, FaXmark } from "react-icons/fa6";
+import ReactMarkdown from "react-markdown";
 
 const Chatbot = () => {
   const [open, setOpen] = useState(false);
@@ -161,7 +162,9 @@ const Chatbot = () => {
                       : "bg-base-200"
                   }`}
                 >
+                <ReactMarkdown>
                   {message.content}
+                 </ReactMarkdown>
                 </div>
               </div>
             ))}
